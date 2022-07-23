@@ -35,7 +35,7 @@ def enqueue(process, request):
     else:
         #checks if there's tasks less priority
         for i in range(len(process)):
-            current = process.__getitem__(i)
+            current = process.__getitem__(0)
             key_current = list(current.keys())[0]
 
             #pop on process till fit the priority deque sort
@@ -50,6 +50,35 @@ def enqueue(process, request):
 
     return process
 
+def scramble(array):
+    # False = append on right || True = append on left
+    flux = False 
+    deque_scramble = deque()     #deque result
+    store_stacks = []    #list to store stacks, sorted by appearance [flow controlled by '(' and ')']
+    stack_scramble = Stack()    #stack to put char that appeared between parenteses
+    for char in array:
+        if(char == '('):
+            flux = True
+        elif(char == ')'):
+            flux = False
+        else:
+            if(flux):
+                stack_scramble.push(char)
+
+            else:                
+                deque_scramble.append(char)
+                if(len(deque_scramble) != 0):
+                    store_stacks.append(stack_scramble)
+                    stack_scramble = Stack()
+
+    for stack in store_stacks:
+        while(not stack.isEmpty()):
+            deque_scramble.appendleft(stack.pop())
+
+    while(len(deque_scramble) != 0):
+        print(deque_scramble.popleft(), end="")
+    print()
+
 
 entrada = input().split()
 process = deque()
@@ -63,8 +92,19 @@ while entrada[0] != "stop":
             request = input().split()            
             process = enqueue(process, request)
 
+
     elif(entrada[0] == "go"):
-        pass
+        dic_next_process = process.pop()
+
+        #getting the task to execute
+        task = [*dic_next_process.values()][0][0]
+        if(task == "scramble"):
+            #getting from dict just the array of chars for unscramble
+            char_array = [*dic_next_process.values()][0][1:][0]
+            scramble(char_array)
+
+        # elif(dic_next_process == "dekey"):
+
 
     entrada = input().split()
 
