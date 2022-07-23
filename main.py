@@ -1,3 +1,4 @@
+
 from collections import deque
 
 # Pilha (topo: esquerda // bottom: direita)
@@ -79,7 +80,29 @@ def scramble(array):
     print()
 
 
-# def dekey():
+def dekey(request):
+    times = int(request[0])
+    address = deque()
+
+    #initializing deque_adrress
+    for bit in request[1:]:
+        address.append(bit)
+
+    #decrypting the address
+    for i in range(times):
+        a = address.popleft()
+        b = address.popleft()
+
+        if(a > b):
+            address.appendleft(a)
+            address.append(b)
+        else:
+            address.appendleft(b)
+            address.append(a)
+    
+    for i in range(len(address)):
+        print(address.popleft(), end="")
+    print()
 
 entrada = input().split()
 process = deque()
@@ -105,7 +128,9 @@ while entrada[0] != "stop":
             scramble(char_array)
 
         elif(task == "dekey"):
-            pass
+            #getting from dict the instruction to execute with the address
+            char_array = [*dic_next_process.values()][0][1:]
+            dekey(char_array)
 
     entrada = input().split()
 
