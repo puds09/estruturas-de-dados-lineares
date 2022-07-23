@@ -24,7 +24,6 @@ class Stack:
         for elemento in self.items: print(elemento)
         return ""
 
-
 def enqueue(process, request):
     unordered_priority = Stack()
     priority = int(request[0])
@@ -80,6 +79,8 @@ def scramble(array):
     print()
 
 
+# def dekey():
+
 entrada = input().split()
 process = deque()
 
@@ -93,7 +94,7 @@ while entrada[0] != "stop":
             process = enqueue(process, request)
 
 
-    elif(entrada[0] == "go"):
+    elif(entrada[0] == "go" and len(process) != 0):
         dic_next_process = process.pop()
 
         #getting the task to execute
@@ -103,9 +104,9 @@ while entrada[0] != "stop":
             char_array = [*dic_next_process.values()][0][1:][0]
             scramble(char_array)
 
-        # elif(dic_next_process == "dekey"):
-
+        elif(task == "dekey"):
+            pass
 
     entrada = input().split()
 
-print(process)
+print(f'{len(process)} processo(s) órfão(s).')
