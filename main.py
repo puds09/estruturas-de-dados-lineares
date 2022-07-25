@@ -59,41 +59,42 @@ def scramble(array):
     for char in array:
         if(char == '('):
             flux = True
+            if not stack_scramble.isEmpty(): store_stacks.append(stack_scramble)
+            stack_scramble = Stack()
         elif(char == ')'):
             flux = False
+            if not stack_scramble.isEmpty(): store_stacks.append(stack_scramble)
+            for stack in store_stacks:
+                while(not stack.isEmpty()):
+                    deque_scramble.appendleft(stack.pop())
         else:
             if(flux):
                 stack_scramble.push(char)
-
             else:                
                 deque_scramble.append(char)
-                if(len(deque_scramble) != 0):
-                    store_stacks.append(stack_scramble)
-                    stack_scramble = Stack()
 
-    for stack in store_stacks:
-        while(not stack.isEmpty()):
-            deque_scramble.appendleft(stack.pop())
 
     while(len(deque_scramble) != 0):
         print(deque_scramble.popleft(), end="")
     print()
 
-
 def dekey(request):
     times = int(request[0])
     address = deque()
 
+    encrypted_address = request[1:]
+    # encrypted_address = "".join(encrypted_address)
+
     #initializing deque_adrress
-    for bit in request[1:]:
-        address.append(bit)
+    for slot in encrypted_address:
+        address.append(slot)
 
     #decrypting the address
     for i in range(times):
         a = address.popleft()
         b = address.popleft()
 
-        if(a > b):
+        if(int(a) > int(b)):
             address.appendleft(a)
             address.append(b)
         else:
