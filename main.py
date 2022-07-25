@@ -22,7 +22,7 @@ class Stack:
         return len(self.items)
 
     def __str__(self):
-        for elemento in self.items: print(elemento)
+        for elemento in self.items: print(elemento, end="")
         return ""
 
 def enqueue(process, request):
@@ -72,11 +72,17 @@ def scramble(array):
                 stack_scramble.push(char)
             else:                
                 deque_scramble.append(char)
+    
+    # avoid desapearement of some chars stored in the stack_scramble
+    if(not stack_scramble.isEmpty()):
+        while(not stack_scramble.isEmpty()):
+            deque_scramble.appendleft(stack_scramble.pop())
 
 
     while(len(deque_scramble) != 0):
         print(deque_scramble.popleft(), end="")
     print()
+
 
 def dekey(request):
     times = int(request[0])
