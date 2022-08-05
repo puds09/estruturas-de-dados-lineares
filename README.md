@@ -9,7 +9,7 @@ Implementar o que foi pedido no [enunciado](https://github.com/puds09/estruturas
 
 ## Pontuação
 
-Nota recebida nesse projeto: 9,06/10
+Nota recebida nesse projeto: 10/10
 
 
 
