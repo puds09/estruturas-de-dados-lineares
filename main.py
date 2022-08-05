@@ -53,6 +53,7 @@ def enqueue(process, request):
 def scramble(array):
     # False = append on right || True = append on left
     flux = False 
+    special_case = True
     deque_scramble = deque()     #deque result
     store_stacks = []    #list to store stacks, sorted by appearance [flow controlled by '(' and ')']
     stack_scramble = Stack()    #stack to put char that appeared between parenteses
@@ -62,6 +63,7 @@ def scramble(array):
             if not stack_scramble.isEmpty(): store_stacks.append(stack_scramble)
             stack_scramble = Stack()
         elif(char == ')'):
+            special_case = False
             flux = False
             if not stack_scramble.isEmpty(): store_stacks.append(stack_scramble)
             for stack in store_stacks:
@@ -72,16 +74,25 @@ def scramble(array):
                 stack_scramble.push(char)
             else:                
                 deque_scramble.append(char)
-    
+
+    #if open some '(' and never close it    
+    if(special_case):
+        for i in range(len(store_stacks)):
+            stack = store_stacks[i]
+            if(not stack.isEmpty()):
+                while(not stack.isEmpty()):
+                    deque_scramble.appendleft(stack.pop())
+
     # avoid desapearement of some chars stored in the stack_scramble
     if(not stack_scramble.isEmpty()):
         while(not stack_scramble.isEmpty()):
             deque_scramble.appendleft(stack_scramble.pop())
 
 
-    while(len(deque_scramble) != 0):
-        print(deque_scramble.popleft(), end="")
-    print()
+    if(len(deque_scramble) != 0):
+        while(len(deque_scramble) != 0):
+            print(deque_scramble.popleft(), end="")
+        print()
 
 
 def dekey(request):
