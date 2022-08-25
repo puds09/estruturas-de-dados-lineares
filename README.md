@@ -1,16 +1,14 @@
 # Estrutura de Dados Lineares
 
+## Pontuação final
+
+![](https://github.com/puds09/estruturas-de-dados-lineares/blob/main/grade_canva_10-10.png)
+
 ## Objetivo
 
 Implementar o que foi pedido no [enunciado](https://github.com/puds09/estruturas-de-dados-lineares/blob/main/enunciado.md)
 
 <p>Utilizando estruturas lineares em Python</p>
-
-
-## Pontuação
-
-Nota recebida nesse projeto: 10/10
-
 
 
 ## Dúvidas/ Contato ❓:
